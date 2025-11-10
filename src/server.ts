@@ -10,6 +10,7 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import { initializeGenkit, simpleSuggestionsFlow } from './app/genkit/index';
 import { GroceryItem } from './app/models/grocery.type';
+import { z } from 'zod';
 
 // Load environment variables
 dotenv.config();
@@ -37,9 +38,18 @@ app.post('/api/smart-suggestions', async (req, res) => {
 
     const itemNames = (items as GroceryItem[]).map((item) => item.name);
 
-    const result = await simpleSuggestionsFlow({ items: itemNames });
+    const result = await simpleSuggestionsFlow.execute({ items: itemNames });
 
-    const suggestions = result.suggestions.map((suggestion) => ({
+    type Suggestion = {
+      name: string;
+      category: string;
+      reason: string;
+      priority: 'low' | 'medium' | 'high';
+      quantity?: number;
+      unit?: string;
+    };
+
+    const suggestions = result.suggestions.map((suggestion: Suggestion) => ({
       item: {
         id: Math.random().toString(36).substring(2),
         name: suggestion.name,
