@@ -1,119 +1,113 @@
-/* Header Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .app-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-bottom: 1px solid #e1e8ed;
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  height: 4rem;
 }
 
 .nav-brand .brand-link {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
   text-decoration: none;
-  color: white;
+  color: #2c3e50;
   font-weight: 700;
   font-size: 1.5rem;
-  transition: transform 0.2s ease;
-}
-
-.nav-brand .brand-link:hover {
-  transform: scale(1.05);
 }
 
 .brand-icon {
-  font-size: 2rem;
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-.brand-text {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-right: 0.5rem;
+  font-size: 1.8rem;
 }
 
 .nav-menu {
   display: flex;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 2rem;
 }
 
 .nav-link {
-  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
+  color: #5a6c7d;
+  font-weight: 500;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   position: relative;
 }
 
 .nav-link:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
+  color: #2c3e50;
+  background: #f8f9fa;
 }
 
 .nav-link.active {
-  color: white;
-  background: rgba(255, 255, 255, 0.2);
+  color: #3498db;
+  background: #e3f2fd;
 }
 
-.nav-link.active::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: white;
-  border-radius: 2px;
+.create-link {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white !important;
+  font-weight: 600;
 }
 
-/* Main Content Styles */
+.create-link:hover {
+  background: linear-gradient(135deg, #2980b9, #3498db);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.create-link.active {
+  background: linear-gradient(135deg, #2980b9, #3498db);
+  color: white !important;
+}
+
 .main-content {
-  min-height: calc(100vh - 140px);
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  flex: 1;
+  background: #f8f9fa;
 }
 
-/* Footer Styles */
 .app-footer {
-  background: #2d3748;
-  color: #e2e8f0;
-  padding: 2rem;
-  margin-top: 3rem;
+  background: #2c3e50;
+  color: white;
+  padding: 2rem 0;
+  margin-top: auto;
 }
 
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-}
-
-.footer-content p {
-  margin: 0;
-  font-size: 0.95rem;
 }
 
 .footer-links {
@@ -122,31 +116,36 @@
 }
 
 .footer-link {
-  color: #cbd5e0;
+  color: #bdc3c7;
   text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 }
 
 .footer-link:hover {
   color: white;
 }
 
-/* Responsive Styles */
 @media (max-width: 768px) {
   .navbar {
+    padding: 0 1rem;
     flex-direction: column;
+    height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     gap: 1rem;
-    padding: 1rem;
   }
 
   .nav-menu {
-    width: 100%;
-    justify-content: center;
+    gap: 1rem;
   }
 
-  .main-content {
-    padding: 1rem;
+  .nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .brand-text {
+    font-size: 1.2rem;
   }
 
   .footer-content {
@@ -155,18 +154,6 @@
   }
 
   .footer-links {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .brand-text {
-    font-size: 1.2rem;
-  }
-
-  .nav-link {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
+    justify-content: center;
   }
 }
