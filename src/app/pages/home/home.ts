@@ -17,36 +17,28 @@ import { AiGroceryAssistant } from '../../services/ai-grocery-assistant';
   selector: 'app-home',
   templateUrl: './home.html',
   styleUrl: './home.css',
-  // 🎯 Angular 20 Feature: OnPush change detection for better performance
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // 🎯 Angular 20 Feature: Standalone components (no modules needed!)
   imports: [CommonModule, RouterModule, FormsModule],
 })
 export class Home implements OnDestroy {
-  // 🎯 Angular 20 Feature: inject() function instead of constructor injection
   private groceryService = inject(Grocery);
   private aiAssistant = inject(AiGroceryAssistant);
 
-  // 🎯 Angular 20 Feature: Signals for reactive state management
   protected readonly isGeneratingList = signal(false);
 
-  // 🎯 Angular 20 Feature: Using resource-based AI service signals
   protected readonly aiSuggestions = this.aiAssistant.suggestions;
   protected readonly isLoadingAISuggestions = this.aiAssistant.isLoading;
   protected readonly aiError = this.aiAssistant.error;
 
   protected readonly showSuggestions = signal(false);
 
-  // Manual item entry signals
   protected readonly newItemName = signal('');
   protected readonly newItemQuantity = signal('');
   protected readonly newItemUnit = signal('');
   protected readonly isAddingItem = signal(false);
 
-  // Unit options for dropdowns
   protected readonly unitOptions = UNIT_OPTIONS;
 
-  // 🎯 Angular 20 Feature: Readonly signals from service
   protected readonly currentList = this.groceryService.list;
 
   onGenerateGroceryList(): void {
@@ -124,11 +116,8 @@ export class Home implements OnDestroy {
     const currentList = this.currentList();
     if (!currentList) return;
 
-    // 🎯 Angular 20 Feature: Use resource-based AI service for all suggestions
     this.aiAssistant.generateSmartSuggestions(currentList.items);
 
-    // The suggestions will be automatically updated via the aiSuggestions signal
-    // which is computed from the httpResource in the AI service
     this.showSuggestions.set(true);
   }
 
@@ -195,7 +184,6 @@ export class Home implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // 🎯 Angular 20 Feature: httpResource() handles cleanup automatically
     this.aiAssistant.clearSuggestions();
   }
 

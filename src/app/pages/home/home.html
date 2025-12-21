@@ -11,7 +11,6 @@
         (click)="onGenerateGroceryList()"
         [disabled]="isGeneratingList()"
       >
-        <!-- 🎯 Angular 20 Feature: New control flow syntax @if -->
         @if (isGeneratingList()) {
           <div class="button-spinner"></div>
           Generating suggestions...
@@ -23,7 +22,6 @@
   </div>
 </div>
 
-<!-- 🎯 Angular 20 Feature: New control flow @if instead of *ngIf -->
 @if (currentList()) {
   <section class="current-list-section">
     <div class="container">
@@ -34,7 +32,6 @@
           <span class="item-count">{{ currentList()!.items.length }} items</span>
         </div>
         <div class="grocery-items">
-          <!-- 🎯 Angular 20 Feature: New control flow @for instead of *ngFor -->
           @for (item of currentList()!.items; track item.id) {
             <div class="grocery-item">
               <div class="item-info">
@@ -49,7 +46,6 @@
           }
         </div>
 
-        <!-- Add Item Form -->
         <div class="add-item-form">
           <h4>Add Item</h4>
           <div class="form-row">
